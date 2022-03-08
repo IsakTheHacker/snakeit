@@ -1,2 +1,1 @@
-# snakeit
-Snake in Terminal
+# snakeit - Snake in Terminal
