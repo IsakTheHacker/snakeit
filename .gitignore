@@ -1,0 +1,4 @@
+#Ignore binaries and intermediates
+bin/
+*.out
+*.o
