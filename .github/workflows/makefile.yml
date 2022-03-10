@@ -11,6 +11,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      
+    
+    - name: Prepare build
+      run: mkdir bin
+    
     - name: Build project
       run: make
