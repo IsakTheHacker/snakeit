@@ -8,6 +8,7 @@ SnakeGame::SnakeGame() {
 }
 SnakeGame::~SnakeGame() {
 	nodelay(stdscr, false);
+	clear();
 	endwin();
 }
 
