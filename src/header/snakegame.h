@@ -9,12 +9,14 @@
 #include "stdconfig.h"
 #include "snake.h"
 #include "food.h"
+#include "collMgr.h"
 
 class SnakeGame {
 private:
 	int maxheight, maxwidth;
 	Snake ekans;
 	FoodMgr* foodMgr;
+	CollMgr* collMgr;
 
 	void initWindow();
 

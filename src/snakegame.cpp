@@ -5,6 +5,7 @@ SnakeGame::SnakeGame() {
 	ekans = Snake(7, Direction::RIGHT);
 	initWindow();
 	foodMgr = new FoodMgr(1, 0, 0, maxheight, maxwidth);
+	collMgr = new CollMgr(0, 0, maxheight, maxwidth);
 }
 SnakeGame::~SnakeGame() {
 	nodelay(stdscr, false);
@@ -48,6 +49,10 @@ int SnakeGame::play() {
 			// usleep(stdconf::delay);
 		}
 		if (ekans.checkSelfCollision()) {
+			//Collision happened, GAME OVER
+			return 1;
+		}
+		if (collMgr->checkForCollision(ekans.getHead().y, ekans.getHead().x)) {
 			//Collision happened, GAME OVER
 			return 1;
 		}
