@@ -8,7 +8,7 @@ CXXFLAGS := -std=c++17 -Wall -g
 srcdir := .\/src\/
 bindir := .\/bin\/
 
-APPNAME := atap
+APPNAME := snakeit
 INCLUDES := -I./src/header/
 LDLIBS := -lncurses
 
