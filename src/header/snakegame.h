@@ -8,11 +8,13 @@
 
 #include "stdconfig.h"
 #include "snake.h"
+#include "food.h"
 
 class SnakeGame {
 private:
 	int maxheight, maxwidth;
 	Snake ekans;
+	FoodMgr* foodMgr;
 
 	void initWindow();
 
@@ -21,5 +23,4 @@ public:
 	~SnakeGame();
 
 	int play();
-	void render();
 };

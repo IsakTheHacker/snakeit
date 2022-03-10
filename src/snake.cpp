@@ -23,7 +23,37 @@ void Snake::draw() {
 	}
 }
 
-void Snake::step() {
+Bodypart Snake::getHead() {
+	return body[body.size() - 1];
+}
+
+void Snake::lengthen(int bodypartAmount) {
+	//Replace head with body part
+	move(body[body.size()-1].y, body[body.size()-1].x); 		//Move to old head
+	printw(char2cstr(stdconf::snakeBodyPart));
+	body[body.size()-1] = Bodypart(body[body.size()-1].y, body[body.size()-1].x, stdconf::snakeBodyPart);
+	
+	switch(direction) {
+	case Direction::RIGHT:
+		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x + 1, stdconf::snakeHead));
+	break;
+	case Direction::LEFT:
+		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x - 1, stdconf::snakeHead));
+	break;
+	case Direction::DOWN :
+		body.push_back(Bodypart(body[body.size()-1].y + 1, body[body.size()-1].x, stdconf::snakeHead));
+	break;
+	case Direction::UP:
+		body.push_back(Bodypart(body[body.size()-1].y - 1, body[body.size()-1].x, stdconf::snakeHead));
+	break;
+	}
+
+	//Draw new head
+	move(body[body.size()-1].y, body[body.size()-1].x); 		//Move to new head
+	printw(char2cstr(stdconf::snakeHead));
+}
+
+void Snake::progress() {
 
 	int cy, cx;
 	getyx(stdscr, cy, cx);

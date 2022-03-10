@@ -1,8 +1,10 @@
 #pragma once
 
 #include <vector>
+#include <ncurses.h>
 
 #include "stdconfig.h"
+#include "handyFunctions.h"
 
 class Food {
 public:
@@ -14,8 +16,10 @@ public:
 class FoodMgr {
 public:
 	int amount;
+	int minheight, minwidth, maxheight, maxwidth;
 	std::vector<Food> foodVec;
-	FoodMgr(const int& amountFoodAtSameTime);
+	FoodMgr(int amountFoodAtSameTime, int minheight, int minwidth, int maxheight, int maxwidth);
 	void generate();
 	bool checkIfEaten(int y, int x);
+	void draw();
 };

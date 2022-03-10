@@ -1,5 +1,13 @@
 #include "handyFunctions.h"
 
+int randIntRange(int min, int max) {
+	std::random_device rd;
+	std::mt19937 rng(rd());
+	std::uniform_int_distribution<std::mt19937::result_type> dist(min, max);
+
+	return dist(rng);
+}
+
 const char* char2cstr(const char& c) {
 	std::string str = {c};
 	return str.c_str();
@@ -22,17 +30,17 @@ const char* char2cstr(const char& c) {
 	   	What happened was that it spit out random characters from memory
 	   	we didn't own resulting in VERY strange behaviour:
 
-		                      U@
-                      U@
-                 U@   U@
-             U@  U@   U@       UUUUU@
-             U@  U@   U@       U@  U@
-             U@  U@   U@       U@  U@        UUUUUU@
-             U@                                                oooooooO@
-             U@       U@                     U@   U@
-             U@                    U@        U@
-             U@                              U@
-             UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU@
+							  U@
+					  U@
+				 U@   U@
+			 U@  U@   U@       UUUUU@
+			 U@  U@   U@       U@  U@
+			 U@  U@   U@       U@  U@        UUUUUU@
+			 U@                                                oooooooO@
+			 U@       U@                     U@   U@
+			 U@                    U@        U@
+			 U@                              U@
+			 UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU@
 
 		(Terminal output)
 

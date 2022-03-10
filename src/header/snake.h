@@ -27,5 +27,7 @@ public:
 	Direction direction;
 	Snake(int bodyLength = 3, Direction direction = Direction::RIGHT);
 	void draw();
-	void step();
+	void progress();
+	Bodypart getHead();
+	void lengthen(int bodypartAmount);
 };

@@ -4,6 +4,7 @@
 SnakeGame::SnakeGame() {
 	ekans = Snake(7, Direction::RIGHT);
 	initWindow();
+	foodMgr = new FoodMgr(1, 0, 0, maxheight, maxwidth);
 }
 SnakeGame::~SnakeGame() {
 	nodelay(stdscr, false);
@@ -39,7 +40,12 @@ int SnakeGame::play() {
 		}
 
 		//Do processing
-		ekans.step();
+		foodMgr->generate();
+		ekans.progress();
+		if (foodMgr->checkIfEaten(ekans.getHead().y, ekans.getHead().x)) {
+			ekans.lengthen(1);
+			// usleep(stdconf::delay);
+		}
 
 		//Render output
 		ekans.draw();
@@ -56,8 +62,4 @@ void SnakeGame::initWindow() {
 	noecho(); // user input is not displayed on the screen
 	curs_set(0); // cursor symbol is not not displayed on the screen (Linux)
 	getmaxyx(stdscr, maxheight, maxwidth); // define dimensions of game window
-}
-
-void SnakeGame::render() {
-	ekans.draw();
 }
