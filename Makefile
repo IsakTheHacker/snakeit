@@ -12,7 +12,7 @@ APPNAME := atap
 INCLUDES := -I./src/header/
 LDLIBS := -lncurses
 
-srcfiles := $(srcdir)main.cpp $(srcdir)snakegame.cpp
+srcfiles := $(srcdir)main.cpp $(srcdir)snakegame.cpp $(srcdir)food.cpp
 
 
 #Build the app specified in APPNAME for the "all" or "default" target
