@@ -30,4 +30,5 @@ public:
 	void progress();
 	Bodypart getHead();
 	void lengthen(int bodypartAmount);
+	bool checkSelfCollision();
 };

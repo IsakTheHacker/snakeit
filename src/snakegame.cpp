@@ -46,12 +46,17 @@ int SnakeGame::play() {
 			ekans.lengthen(1);
 			// usleep(stdconf::delay);
 		}
+		if (ekans.checkSelfCollision()) {
+			//Collision happened, GAME OVER
+			return 1;
+		}
 
 		//Render output
 		ekans.draw();
 		
 		usleep(stdconf::delay);
 	}
+	return 0;
 }
 
 //Helper functions

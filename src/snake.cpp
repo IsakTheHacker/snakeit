@@ -53,6 +53,13 @@ void Snake::lengthen(int bodypartAmount) {
 	printw(char2cstr(stdconf::snakeHead));
 }
 
+bool Snake::checkSelfCollision() {
+	for (size_t i = 0; i < body.size()-1; i++)					//"body.size()-1" because we want to exclude the head
+		if (getHead().y == body[i].y && getHead().x == body[i].x)
+			return true;
+	return false;
+}
+
 void Snake::progress() {
 
 	int cy, cx;
