@@ -16,5 +16,5 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Build project!
-    - uses: snapcore/action-build@v1
+      uses: snapcore/action-build@v1
     
