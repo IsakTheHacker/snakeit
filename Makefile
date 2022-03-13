@@ -24,6 +24,9 @@ echo: 									#Print source files
 	@echo $(srcfiles)
 	@echo -e ""
 
+install:
+	mv bin $(DESTDIR)
+
 clean:
 	rm -f $(bindir)$(APPNAME)
 
