@@ -22,7 +22,7 @@ jobs:
       id: build
     
     - name: Publish to the snapstore
-    - uses: snapcore/action-publish@v1
+      uses: snapcore/action-publish@v1
       with:
         store_login: ${{ secrets.STORE_LOGIN }}
         snap: ${{ steps.build.outputs.snap }}
