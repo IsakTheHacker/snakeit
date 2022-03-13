@@ -1,4 +1,4 @@
-name: Snapcraft Build & Publish
+name: Snapcraft Build, Test, Publish
 
 # Controls when the workflow will run
 on:
@@ -11,17 +11,21 @@ on:
   workflow_dispatch:
     
 jobs:
-  build:
+  build_test_publish:
     runs-on: ubuntu-latest
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     
-    - name: Build project!
+    - name: Build project
       uses: snapcore/action-build@v1
       id: build
     
-    - name: Publish to the snapstore
+    - name: Try to install project
+      run: |
+        sudo snap install --dangerous ${{ steps.build.outputs.snap }}
+
+    - name: Publish to the snapstore!
       uses: snapcore/action-publish@v1
       with:
         store_login: ${{ secrets.STORE_LOGIN }}
