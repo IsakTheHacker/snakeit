@@ -6,6 +6,10 @@ description: |
   A simple text-based implementation of the classic Snake game.
   Collect food to make your snake longer and try to not hit
   any walls or your tail!
+title: Snake in Terminal
+website: https://github.com/IsakTheHacker/snakeit
+source-code: https://github.com/IsakTheHacker/snakeit.git
+issues: https://github.com/IsakTheHacker/snakeit/issues
 
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
