@@ -22,6 +22,6 @@ parts:
   snakeit:
     source: https://github.com/IsakTheHacker/snakeit.git
     source-type: git
-    override-pull: snapcraftctl pull && mkdir bin
+    override-pull: snapcraftctl pull && mkdir -p bin
     plugin: make
     build-packages: [libncurses-dev]
