@@ -12,7 +12,7 @@ Snake::Snake(int bodyLength, Direction direction) {
 	for (int i = 0; i < bodyLength; i++) {
 		body.push_back(Bodypart(0, stdconf::xOffset * i, stdconf::snakeBodyPart));
 	}
-	body.push_back(Bodypart(0, stdconf::xOffset * bodyLength, stdconf::snakeHead));
+	body.push_back(Bodypart(0, stdconf::xOffset * bodyLength, stdconf::snakeHeadRight));
 	
 	this->direction = direction;
 }
@@ -40,22 +40,22 @@ void Snake::lengthen(int bodypartAmount) {
 	
 	switch(direction) {
 	case Direction::RIGHT:
-		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x + stdconf::xOffset, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x + stdconf::xOffset, stdconf::snakeHeadRight));
 	break;
 	case Direction::LEFT:
-		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x - stdconf::xOffset, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x - stdconf::xOffset, stdconf::snakeHeadLeft));
 	break;
 	case Direction::DOWN :
-		body.push_back(Bodypart(body[body.size()-1].y + stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y + stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHeadDown));
 	break;
 	case Direction::UP:
-		body.push_back(Bodypart(body[body.size()-1].y - stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y - stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHeadUp));
 	break;
 	}
 
 	//Draw new head
 	move(body[body.size()-1].y, body[body.size()-1].x); 		//Move to new head
-	cchar = wchar2cchar(stdconf::snakeHead);
+	cchar = wchar2cchar(body[body.size()-1].c);
 	add_wch(&cchar);
 }
 
@@ -86,22 +86,22 @@ void Snake::progress() {
 	
 	switch(direction) {
 	case Direction::RIGHT:
-		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x + stdconf::xOffset, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x + stdconf::xOffset, stdconf::snakeHeadRight));
 	break;
 	case Direction::LEFT:
-		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x - stdconf::xOffset, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x - stdconf::xOffset, stdconf::snakeHeadLeft));
 	break;
 	case Direction::DOWN :
-		body.push_back(Bodypart(body[body.size()-1].y + stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y + stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHeadDown));
 	break;
 	case Direction::UP:
-		body.push_back(Bodypart(body[body.size()-1].y - stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y - stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHeadUp));
 	break;
 	}
 
 	//Draw new head
 	move(body[body.size()-1].y, body[body.size()-1].x); 		//Move to new head
-	cchar = wchar2cchar(stdconf::snakeHead);
+	cchar = wchar2cchar(body[body.size()-1].c);
 	add_wch(&cchar);
 
 	move(cy, cx);

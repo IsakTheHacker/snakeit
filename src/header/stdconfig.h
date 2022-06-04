@@ -2,8 +2,12 @@
 #include <string>
 
 namespace stdconf {
+	const wchar_t snakeHeadRight = L'▶';
+	const wchar_t snakeHeadLeft = L'◀';
+	const wchar_t snakeHeadDown = L'▼';
+	const wchar_t snakeHeadUp = L'▲';
+
 	const wchar_t snakeBodyPart = L'●';
-	const wchar_t snakeHead = L'◯';
 	const wchar_t food = L'◆';
 	const wchar_t emptySpace = L' ';
 
