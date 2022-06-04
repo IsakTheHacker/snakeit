@@ -68,6 +68,7 @@ int SnakeGame::play() {
 
 //Helper functions
 void SnakeGame::initWindow() {
+	setlocale(LC_ALL, "");
 	initscr(); 					//Initialize the screen
 	nodelay(stdscr, true);
 	keypad(stdscr, true); // initialise the keyboard: we can use arrows for directions
