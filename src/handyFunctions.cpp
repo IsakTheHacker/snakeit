@@ -8,11 +8,17 @@ int randIntRange(int min, int max) {
 	return dist(rng);
 }
 
-const char* char2cstr(const char& c) {
-	std::string str = {c};
-	return str.c_str();
+const cchar_t wchar2cchar(const wchar_t& c) {
+	cchar_t ptr;
+	setcchar(&ptr, &c, 0, 0, nullptr);
+	return ptr;
+}
 
-	//return std::string{c}.c_str();
+std::wstring char2str(const wchar_t& c) {
+	std::wstring str = {c};
+	return str;
+
+	//return std::wstring{c}.c_str();
 	/*
 		The above code also works but has
 	   	a weird syntax LOL

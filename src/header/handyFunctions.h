@@ -2,6 +2,8 @@
 
 #include <string>
 #include <random>
+#include <ncurses.h>
 
-const char* char2cstr(const char& c);
 int randIntRange(int min, int max);
+const cchar_t wchar2cchar(const wchar_t& c);
+std::wstring char2str(const wchar_t& c);

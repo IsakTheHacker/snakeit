@@ -8,6 +8,7 @@ SnakeGame::SnakeGame() {
 	collMgr = new CollMgr(0, 0, maxheight, maxwidth);
 }
 SnakeGame::~SnakeGame() {
+	setlocale(LC_ALL, "");
 	nodelay(stdscr, false);
 	clear();
 	endwin();

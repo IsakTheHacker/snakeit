@@ -10,8 +10,8 @@
 struct Bodypart {
 public:
 	int y, x;
-	char c;
-	Bodypart(const int& row, const int& col, const char& character);
+	wchar_t c;
+	Bodypart(const int& row, const int& col, const wchar_t& character);
 };
 
 enum class Direction {

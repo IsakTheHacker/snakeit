@@ -9,8 +9,9 @@
 class Food {
 public:
 	int y, x;
-	char c;
-	Food(const int& row, const int& col, const char& character);
+	wchar_t c;
+	Food(const int& row, const int& col, const wchar_t& character);
+	Food(const int& row, const int& col, const wchar_t* character);
 };
 
 class FoodMgr {

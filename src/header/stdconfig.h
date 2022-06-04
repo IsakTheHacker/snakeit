@@ -1,9 +1,10 @@
 #pragma once
+#include <string>
 
 namespace stdconf {
-	const char snakeBodyPart = 'o';
-	const char snakeHead = 'O';
-	const char food = '@';
+	const wchar_t snakeBodyPart = L'o';
+	const wchar_t snakeHead = L'O';
+	const wchar_t food = L'@';
 
 	const unsigned int delay = 100000; 		//Something, not milliseconds at least
 }
