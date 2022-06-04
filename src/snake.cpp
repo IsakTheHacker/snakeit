@@ -10,9 +10,9 @@ Bodypart::Bodypart(const int& row, const int& col, const wchar_t& character) {
 //Constructors and destructors
 Snake::Snake(int bodyLength, Direction direction) {
 	for (int i = 0; i < bodyLength; i++) {
-		body.push_back(Bodypart(0, 0 + i, stdconf::snakeBodyPart));
+		body.push_back(Bodypart(0, stdconf::xOffset * i, stdconf::snakeBodyPart));
 	}
-	body.push_back(Bodypart(0, 0 + bodyLength, stdconf::snakeHead));
+	body.push_back(Bodypart(0, stdconf::xOffset * bodyLength, stdconf::snakeHead));
 	
 	this->direction = direction;
 }
@@ -40,16 +40,16 @@ void Snake::lengthen(int bodypartAmount) {
 	
 	switch(direction) {
 	case Direction::RIGHT:
-		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x + 1, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x + stdconf::xOffset, stdconf::snakeHead));
 	break;
 	case Direction::LEFT:
-		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x - 1, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x - stdconf::xOffset, stdconf::snakeHead));
 	break;
 	case Direction::DOWN :
-		body.push_back(Bodypart(body[body.size()-1].y + 1, body[body.size()-1].x, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y + stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHead));
 	break;
 	case Direction::UP:
-		body.push_back(Bodypart(body[body.size()-1].y - 1, body[body.size()-1].x, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y - stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHead));
 	break;
 	}
 
@@ -74,7 +74,8 @@ void Snake::progress() {
 
 	//Remove last bit of tail
 	move(body[0].y, body[0].x); 								//Move to the end of the tail
-	addch(' '); 												//Add empty ch to remove last character
+	cchar = wchar2cchar(stdconf::emptySpace);
+	add_wch(&cchar); 											//Add empty ch to remove last character
 	body.pop_front();
 
 	//Replace head with body part
@@ -85,16 +86,16 @@ void Snake::progress() {
 	
 	switch(direction) {
 	case Direction::RIGHT:
-		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x + 1, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x + stdconf::xOffset, stdconf::snakeHead));
 	break;
 	case Direction::LEFT:
-		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x - 1, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x - stdconf::xOffset, stdconf::snakeHead));
 	break;
 	case Direction::DOWN :
-		body.push_back(Bodypart(body[body.size()-1].y + 1, body[body.size()-1].x, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y + stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHead));
 	break;
 	case Direction::UP:
-		body.push_back(Bodypart(body[body.size()-1].y - 1, body[body.size()-1].x, stdconf::snakeHead));
+		body.push_back(Bodypart(body[body.size()-1].y - stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHead));
 	break;
 	}
 

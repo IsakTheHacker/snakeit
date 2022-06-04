@@ -13,7 +13,7 @@ void CollMgr::changeBorderDim(int yMin, int xMin, int yMax, int xMax) {
 }
 
 bool CollMgr::checkForCollision(int y, int x) {
-	if ((y == yMin-1 || y == yMax) || (x == xMin-1 || x == xMax)) {
+	if ((y == yMin-stdconf::yOffset || y == yMax) || (x == xMin-stdconf::xOffset || x == xMax)) {
 		return true;
 	} else {
 		return false;

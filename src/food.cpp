@@ -14,7 +14,7 @@ FoodMgr::FoodMgr(int amountFoodAtSameTime, int minheight, int minwidth, int maxh
 void FoodMgr::generate() {
 	while ((int)foodVec.size() < amount) {
 		int randy = randIntRange(minheight, maxheight);
-		int randx = randIntRange(minwidth, maxwidth);
+		int randx = randIntRange(minwidth, maxwidth/2)*2;
 		foodVec.push_back(Food(randy, randx, stdconf::food));
 	}
 	draw();

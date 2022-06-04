@@ -1,4 +1,5 @@
 #pragma once
+#include "stdconfig.h"
 
 class CollMgr {
 public:

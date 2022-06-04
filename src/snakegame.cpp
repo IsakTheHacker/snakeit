@@ -47,7 +47,6 @@ int SnakeGame::play() {
 		ekans.progress();
 		if (foodMgr->checkIfEaten(ekans.getHead().y, ekans.getHead().x)) {
 			ekans.lengthen(1);
-			// usleep(stdconf::delay);
 		}
 		if (ekans.checkSelfCollision()) {
 			//Collision happened, GAME OVER
