@@ -24,7 +24,9 @@ void FoodMgr::draw() {
 	cchar_t cchar;
 	for (Food food : foodVec) {
 		cchar = wchar2cchar(food.c);
+		SAFE_ATTRON(COLOR_PAIR(FOOD_PAIR));
 		mvwadd_wch(stdscr, food.y, food.x, &cchar);
+		SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
 	}
 }
 

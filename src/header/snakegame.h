@@ -10,6 +10,7 @@
 #include "snake.h"
 #include "food.h"
 #include "collMgr.h"
+#include "globals.h"
 
 class SnakeGame {
 private:
@@ -19,6 +20,7 @@ private:
 	CollMgr* collMgr;
 
 	void initWindow();
+	void deinitWindow();
 
 public:
 	SnakeGame();

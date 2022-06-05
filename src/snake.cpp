@@ -21,7 +21,13 @@ void Snake::draw() {
 	cchar_t cchar;
 	for (Bodypart part : body) {
 		cchar = wchar2cchar(part.c);
+		if (part.c == stdconf::snakeBodyPart) {
+			SAFE_ATTRON(COLOR_PAIR(BODYPART_PAIR));
+		} else {
+			SAFE_ATTRON(COLOR_PAIR(HEAD_PAIR));
+		}
 		mvwadd_wch(stdscr, part.y, part.x, &cchar);
+		SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
 	}
 }
 
@@ -35,7 +41,9 @@ void Snake::lengthen(int bodypartAmount) {
 	//Replace head with body part
 	move(body[body.size()-1].y, body[body.size()-1].x); 		//Move to old head
 	cchar = wchar2cchar(stdconf::snakeBodyPart);
+	SAFE_ATTRON(COLOR_PAIR(BODYPART_PAIR));
 	add_wch(&cchar);
+	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
 	body[body.size()-1] = Bodypart(body[body.size()-1].y, body[body.size()-1].x, stdconf::snakeBodyPart);
 	
 	switch(direction) {
@@ -56,7 +64,9 @@ void Snake::lengthen(int bodypartAmount) {
 	//Draw new head
 	move(body[body.size()-1].y, body[body.size()-1].x); 		//Move to new head
 	cchar = wchar2cchar(body[body.size()-1].c);
+	SAFE_ATTRON(COLOR_PAIR(HEAD_PAIR));
 	add_wch(&cchar);
+	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
 }
 
 bool Snake::checkSelfCollision() {
@@ -81,7 +91,9 @@ void Snake::progress() {
 	//Replace head with body part
 	move(body[body.size()-1].y, body[body.size()-1].x); 		//Move to old head
 	cchar = wchar2cchar(stdconf::snakeBodyPart);
+	SAFE_ATTRON(COLOR_PAIR(BODYPART_PAIR));
 	add_wch(&cchar);
+	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
 	body[body.size()-1] = Bodypart(body[body.size()-1].y, body[body.size()-1].x, stdconf::snakeBodyPart);
 	
 	switch(direction) {
@@ -102,7 +114,9 @@ void Snake::progress() {
 	//Draw new head
 	move(body[body.size()-1].y, body[body.size()-1].x); 		//Move to new head
 	cchar = wchar2cchar(body[body.size()-1].c);
+	SAFE_ATTRON(COLOR_PAIR(HEAD_PAIR));
 	add_wch(&cchar);
+	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
 
 	move(cy, cx);
 	refresh();

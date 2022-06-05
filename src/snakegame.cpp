@@ -2,16 +2,13 @@
 
 //Constructors and destructors
 SnakeGame::SnakeGame() {
-	ekans = Snake(7, Direction::RIGHT);
 	initWindow();
+	ekans = Snake(7, Direction::RIGHT);
 	foodMgr = new FoodMgr(1, 0, 0, maxheight, maxwidth);
 	collMgr = new CollMgr(0, 0, maxheight, maxwidth);
 }
 SnakeGame::~SnakeGame() {
-	setlocale(LC_ALL, "");
-	nodelay(stdscr, false);
-	clear();
-	endwin();
+	deinitWindow();
 }
 
 int SnakeGame::play() {
@@ -74,4 +71,20 @@ void SnakeGame::initWindow() {
 	noecho(); // user input is not displayed on the screen
 	curs_set(0); // cursor symbol is not not displayed on the screen (Linux)
 	getmaxyx(stdscr, maxheight, maxwidth); // define dimensions of game window
+
+	if (has_colors()) {
+		start_color();
+		init_pair(HEAD_PAIR, COLOR_BLUE, COLOR_BLACK);			//Head color pair
+		init_pair(BODYPART_PAIR, COLOR_CYAN, COLOR_BLACK);		//Bodypart color pair
+		init_pair(FOOD_PAIR, COLOR_RED, COLOR_BLACK);			//Food color pair
+		init_pair(COFF_PAIR, COLOR_WHITE, COLOR_BLACK);			//Color OFF pair or Background color pair
+		Globals::supportsColor = true;
+	}
+}
+
+void SnakeGame::deinitWindow() {
+	setlocale(LC_ALL, "");
+	nodelay(stdscr, false);
+	clear();
+	endwin();
 }

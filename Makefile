@@ -12,7 +12,7 @@ APPNAME := snakeit
 INCLUDES := -I./src/header/
 LDLIBS := -lncursesw
 
-srcfiles := $(srcdir)main.cpp $(srcdir)snakegame.cpp $(srcdir)food.cpp $(srcdir)snake.cpp $(srcdir)handyFunctions.cpp $(srcdir)collMgr.cpp
+srcfiles := $(srcdir)main.cpp $(srcdir)snakegame.cpp $(srcdir)food.cpp $(srcdir)snake.cpp $(srcdir)handyFunctions.cpp $(srcdir)collMgr.cpp $(srcdir)globals.cpp
 
 
 #Build the app specified in APPNAME for the "all" or "default" target
