@@ -8,9 +8,9 @@ SnakeGame::SnakeGame() {
 		stdconf::amountFoodAtSameTime,
 		stdconf::foodSpawnframePaddingTop,
 		stdconf::foodSpawnframePaddingLeft,
-		maxheight - stdconf::foodSpawnframePaddingBottom,
+		maxheight - stdconf::foodSpawnframePaddingBottom - 1,
 		maxwidth - stdconf::foodSpawnframePaddingRight);
-	collMgr = new CollMgr(0, 0, maxheight, maxwidth);
+	collMgr = new CollMgr(0, 0, maxheight - 1, maxwidth);
 }
 SnakeGame::~SnakeGame() {
 	deinitWindow();
@@ -45,7 +45,10 @@ int SnakeGame::play() {
 		break;
 		case ' ':
 			//Pause
+			Globals::isPaused = true;
+			drawStatusbar();
 			while (getch() != ' ');
+			Globals::isPaused = false;
 		break;
 		}
 
@@ -65,6 +68,7 @@ int SnakeGame::play() {
 		}
 
 		//Render output
+		drawStatusbar();
 		ekans.draw();
 		
 		usleep(stdconf::delay);
@@ -88,6 +92,7 @@ void SnakeGame::initWindow() {
 		init_pair(BODYPART_PAIR, COLOR_CYAN, COLOR_BLACK);		//Bodypart color pair
 		init_pair(FOOD_PAIR, COLOR_RED, COLOR_BLACK);			//Food color pair
 		init_pair(COFF_PAIR, COLOR_WHITE, COLOR_BLACK);			//Color OFF pair or Background color pair
+		init_pair(STATUSBAR_PAIR, COLOR_BLACK, COLOR_WHITE);	//Statusbar pair
 		Globals::supportsColor = true;
 	}
 }
@@ -97,4 +102,14 @@ void SnakeGame::deinitWindow() {
 	nodelay(stdscr, false);
 	clear();
 	endwin();
+}
+
+void SnakeGame::drawStatusbar() {
+	std::string str;
+	if (Globals::isPaused)
+		str += "Paused ";
+	std::string filloutStr(maxwidth - str.size(), ' ');
+	SAFE_ATTRON(COLOR_PAIR(STATUSBAR_PAIR));
+	mvprintw(maxheight-1, 0, (str + filloutStr).c_str());
+	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
 }

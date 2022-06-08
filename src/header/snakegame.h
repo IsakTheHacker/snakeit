@@ -21,6 +21,7 @@ private:
 
 	void initWindow();
 	void deinitWindow();
+	void drawStatusbar();
 
 public:
 	SnakeGame();
