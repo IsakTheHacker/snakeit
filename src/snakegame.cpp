@@ -38,6 +38,10 @@ int SnakeGame::play() {
 			//Quit
 			return 2;
 		break;
+		case ' ':
+			//Pause
+			while (getch() != ' ');
+		break;
 		}
 
 		//Do processing

@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 		SnakeGame game;
 		exitStatus = game.play();
 		if (exitStatus == 2) {
-			//User wants to exit the game
+			//Exit the game
 			break;
 		}
 	} while (askToPlayAgain() == YES);
