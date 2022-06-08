@@ -1,6 +1,7 @@
 #include "snakegame.h"
 #include <iostream>
 
+#define YES true
 bool askToPlayAgain();
 
 int main(int argc, char* argv[]) {
@@ -8,7 +9,11 @@ int main(int argc, char* argv[]) {
 	do {
 		SnakeGame game;
 		exitStatus = game.play();
-	} while (askToPlayAgain() && exitStatus != 0);
+		if (exitStatus == 2) {
+			//User wants to exit the game
+			break;
+		}
+	} while (askToPlayAgain() == YES);
 	return 0;
 }
 

@@ -36,6 +36,7 @@ int SnakeGame::play() {
 		break;
 		case KEY_BACKSPACE:
 			//Quit
+			return 2;
 		break;
 		}
 
