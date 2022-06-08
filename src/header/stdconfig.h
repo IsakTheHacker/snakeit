@@ -16,6 +16,11 @@ namespace stdconf {
 	//const wchar_t food = L'@';
 	//const wchar_t emptySpace = L' ';
 
+	const int foodSpawnframePaddingRight = 2;
+	const int foodSpawnframePaddingLeft = 2;
+	const int foodSpawnframePaddingBottom = 1;
+	const int foodSpawnframePaddingTop = 1;
+
 	const int xOffset = 2;
 	const int yOffset = 1;
 	const unsigned int delay = 100000; 		//Something, not milliseconds at least
