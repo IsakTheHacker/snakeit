@@ -40,7 +40,7 @@ int SnakeGame::play() {
 		}
 
 		//Do processing
-		foodMgr->generate();
+		foodMgr->generate(ekans);
 		ekans.progress();
 		if (foodMgr->checkIfEaten(ekans.getHead().y, ekans.getHead().x)) {
 			ekans.lengthen(1);

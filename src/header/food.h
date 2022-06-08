@@ -1,10 +1,12 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
 #include <ncurses.h>
 
 #include "stdconfig.h"
 #include "handyFunctions.h"
+#include "snake.h"
 
 class Food {
 public:
@@ -20,7 +22,7 @@ public:
 	int minheight, minwidth, maxheight, maxwidth;
 	std::vector<Food> foodVec;
 	FoodMgr(int amountFoodAtSameTime, int minheight, int minwidth, int maxheight, int maxwidth);
-	void generate();
+	void generate(const Snake& snake);
 	bool checkIfEaten(int y, int x);
 	void draw();
 };
