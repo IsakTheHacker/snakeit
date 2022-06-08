@@ -13,10 +13,10 @@ int main(int argc, char* argv[]) {
 }
 
 bool askToPlayAgain() {
-	std::cout << "GAME OVER! Do you want to play again? [y/n] ";
+	std::cout << "GAME OVER! Do you want to play again? [Y/n] ";
 	std::string input;
-	std::cin >> input;
-	if (input == "Y" || input == "y") {
+	getline(std::cin, input);
+	if (input == "Y" || input == "y" || input == "") {
 		return true;
 	} else {
 		return false;
