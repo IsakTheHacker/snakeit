@@ -46,7 +46,7 @@ int SnakeGame::play() {
 		case ' ':
 			//Pause
 			Globals::isPaused = true;
-			drawStatusbar();
+			drawStatusbar(ekans);
 			while (getch() != ' ');
 			Globals::isPaused = false;
 		break;
@@ -68,7 +68,7 @@ int SnakeGame::play() {
 		}
 
 		//Render output
-		drawStatusbar();
+		drawStatusbar(ekans);
 		ekans.draw();
 		
 		usleep(stdconf::delay);
@@ -104,12 +104,17 @@ void SnakeGame::deinitWindow() {
 	endwin();
 }
 
-void SnakeGame::drawStatusbar() {
-	std::string str;
+void SnakeGame::drawStatusbar(const Snake& snake) {
+	std::string lStr;
 	if (Globals::isPaused)
-		str += "Paused ";
-	std::string filloutStr(maxwidth - str.size(), ' ');
+		lStr += "Paused ";
+
+	std::string rStr;
+	rStr += "Snake length: ";
+	rStr += std::to_string(snake.body.size());
+
+	std::string filloutStr(maxwidth - lStr.size() - rStr.size(), ' ');
 	SAFE_ATTRON(COLOR_PAIR(STATUSBAR_PAIR));
-	mvprintw(maxheight-1, 0, (str + filloutStr).c_str());
+	mvprintw(maxheight-1, 0, (lStr + filloutStr + rStr).c_str());
 	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
 }

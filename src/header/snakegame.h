@@ -21,7 +21,7 @@ private:
 
 	void initWindow();
 	void deinitWindow();
-	void drawStatusbar();
+	void drawStatusbar(const Snake& snake);
 
 public:
 	SnakeGame();
