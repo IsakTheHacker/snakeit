@@ -20,6 +20,7 @@ namespace stdconf {
 	const int foodSpawnframePaddingLeft = 2;
 	const int foodSpawnframePaddingBottom = 1;
 	const int foodSpawnframePaddingTop = 1;
+	const int amountFoodAtSameTime = 1;
 
 	const int xOffset = 2;
 	const int yOffset = 1;

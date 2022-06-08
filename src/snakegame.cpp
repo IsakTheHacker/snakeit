@@ -5,12 +5,11 @@ SnakeGame::SnakeGame() {
 	initWindow();
 	ekans = Snake(7, Direction::RIGHT);
 	foodMgr = new FoodMgr(
-		1,
+		stdconf::amountFoodAtSameTime,
 		stdconf::foodSpawnframePaddingTop,
 		stdconf::foodSpawnframePaddingLeft,
 		maxheight - stdconf::foodSpawnframePaddingBottom,
-		maxwidth - stdconf::foodSpawnframePaddingRight
-	);
+		maxwidth - stdconf::foodSpawnframePaddingRight);
 	collMgr = new CollMgr(0, 0, maxheight, maxwidth);
 }
 SnakeGame::~SnakeGame() {
