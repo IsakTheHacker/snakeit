@@ -22,6 +22,8 @@ namespace stdconf {
 	const int foodSpawnframePaddingTop = 1;
 	const int amountFoodAtSameTime = 1;
 
+	const bool checkForSnakeSelfCollision = true;
+
 	const int xOffset = 2;
 	const int yOffset = 1;
 	const unsigned int delay = 100000; 		//Something, not milliseconds at least
