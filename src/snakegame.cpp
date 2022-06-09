@@ -62,7 +62,7 @@ int SnakeGame::play() {
 			//Collision happened, GAME OVER
 			return 1;
 		}
-		if (collMgr->checkForCollision(ekans.getHead().y, ekans.getHead().x)) {
+		if (stdconf::checkForSnakeWallCollision && collMgr->checkForCollision(ekans.getHead().y, ekans.getHead().x)) {
 			//Collision happened, GAME OVER
 			return 1;
 		}

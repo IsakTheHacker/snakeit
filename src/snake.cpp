@@ -97,18 +97,33 @@ void Snake::progress() {
 }
 
 void Snake::createNewHead() {
+	int newX, newY;
+	int maxheight, maxwidth;
+	getmaxyx(stdscr, maxheight, maxwidth);	// define dimensions of game window
 	switch (direction) {
 	case Direction::RIGHT:
-		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x + stdconf::xOffset, stdconf::snakeHeadRight));
+		newX = body[body.size()-1].x + stdconf::xOffset;
+		if (newX > maxwidth - 1)
+			newX = 0;
+		body.push_back(Bodypart(body[body.size()-1].y, newX, stdconf::snakeHeadRight));
 	break;
 	case Direction::LEFT:
-		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x - stdconf::xOffset, stdconf::snakeHeadLeft));
+		newX = body[body.size()-1].x - stdconf::xOffset;
+		if (newX < 0)
+			newX = maxwidth - 2;
+		body.push_back(Bodypart(body[body.size()-1].y, newX, stdconf::snakeHeadLeft));
 	break;
-	case Direction::DOWN :
-		body.push_back(Bodypart(body[body.size()-1].y + stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHeadDown));
+	case Direction::DOWN:
+		newY = body[body.size()-1].y + stdconf::yOffset;
+		if (newY > maxheight - 2)
+			newY = 0;
+		body.push_back(Bodypart(newY, body[body.size()-1].x, stdconf::snakeHeadDown));
 	break;
 	case Direction::UP:
-		body.push_back(Bodypart(body[body.size()-1].y - stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHeadUp));
+		newY = body[body.size()-1].y - stdconf::yOffset;
+		if (newY < 0)
+			newY = maxheight - 2;
+		body.push_back(Bodypart(newY, body[body.size()-1].x, stdconf::snakeHeadUp));
 	break;
 	}
 }

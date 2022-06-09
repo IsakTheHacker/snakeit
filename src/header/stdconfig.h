@@ -22,7 +22,8 @@ namespace stdconf {
 	const int foodSpawnframePaddingTop = 1;
 	const int amountFoodAtSameTime = 1;
 
-	const bool checkForSnakeSelfCollision = true;
+	const bool checkForSnakeSelfCollision = false;
+	const bool checkForSnakeWallCollision = false;
 
 	const int xOffset = 2;
 	const int yOffset = 1;
