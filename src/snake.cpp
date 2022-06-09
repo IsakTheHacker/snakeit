@@ -101,25 +101,25 @@ void Snake::createNewHead() {
 	switch (direction) {
 	case Direction::RIGHT:
 		newX = body[body.size()-1].x + stdconf::xOffset;
-		if (newX > Globals::winWidth - 1)
+		if (newX > Globals::winWidth - 1 && !stdconf::checkForSnakeWallCollision)
 			newX = 0;
 		body.push_back(Bodypart(body[body.size()-1].y, newX, stdconf::snakeHeadRight));
 	break;
 	case Direction::LEFT:
 		newX = body[body.size()-1].x - stdconf::xOffset;
-		if (newX < 0)
+		if (newX < 0 && !stdconf::checkForSnakeWallCollision)
 			newX = Globals::winWidth - 2;
 		body.push_back(Bodypart(body[body.size()-1].y, newX, stdconf::snakeHeadLeft));
 	break;
 	case Direction::DOWN:
 		newY = body[body.size()-1].y + stdconf::yOffset;
-		if (newY > Globals::winHeight - 2)
+		if (newY > Globals::winHeight - 2 && !stdconf::checkForSnakeWallCollision)
 			newY = 0;
 		body.push_back(Bodypart(newY, body[body.size()-1].x, stdconf::snakeHeadDown));
 	break;
 	case Direction::UP:
 		newY = body[body.size()-1].y - stdconf::yOffset;
-		if (newY < 0)
+		if (newY < 0 && !stdconf::checkForSnakeWallCollision)
 			newY = Globals::winHeight - 2;
 		body.push_back(Bodypart(newY, body[body.size()-1].x, stdconf::snakeHeadUp));
 	break;

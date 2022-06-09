@@ -33,6 +33,7 @@ int SnakeGame::play() {
 			case ' ':
 				//Pause game
 				Globals::isPaused = !Globals::isPaused;
+				flushinp();
 			break;
 		}
 
@@ -60,8 +61,7 @@ int SnakeGame::play() {
 		winHeightLastFrame = Globals::winHeight;
 		winWidthLastFrame = Globals::winWidth;
 		
-		//Clear input queue and wait for <delay> amount of seconds
-		flushinp();
+		//Wait for <delay> amount of seconds
 		usleep(stdconf::delay);
 	}
 	return 0;
