@@ -18,10 +18,13 @@ private:
 	FoodMgr* foodMgr;
 	CollMgr* collMgr;
 
+	int winHeightLastFrame;
+	int winWidthLastFrame;
+
 	void initWindow();
 	void deinitWindow();
-	void drawStatusbar(const Snake& snake);
-	void redrawWindowIfDimsChanged();
+	void drawStatusbar();
+	bool hasDimensionsChanged();
 	void render();
 
 public:

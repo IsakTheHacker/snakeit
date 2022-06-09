@@ -21,22 +21,23 @@ int SnakeGame::play() {
 	while (true) {
 
 		//Recieve input
+		getmaxyx(stdscr, Globals::winHeight, Globals::winWidth);		//Update dimensions of game window
 		c = getch();
-		switch(c) {
+		switch (c) {
 		case KEY_LEFT:
-			if (ekans.direction != Direction::RIGHT)
+			if (ekans.direction != Direction::RIGHT && !Globals::isPaused)
 				ekans.direction = Direction::LEFT;
 		break;
 		case KEY_RIGHT:
-			if (ekans.direction != Direction::LEFT)
+			if (ekans.direction != Direction::LEFT && !Globals::isPaused)
 				ekans.direction = Direction::RIGHT;
 		break;
 		case KEY_UP:
-			if (ekans.direction != Direction::DOWN)
+			if (ekans.direction != Direction::DOWN && !Globals::isPaused)
 				ekans.direction = Direction::UP;
 		break;
 		case KEY_DOWN:
-			if (ekans.direction != Direction::UP)
+			if (ekans.direction != Direction::UP && !Globals::isPaused)
 				ekans.direction = Direction::DOWN;
 		break;
 		case KEY_BACKSPACE:
@@ -45,31 +46,33 @@ int SnakeGame::play() {
 		break;
 		case ' ':
 			//Pause
-			Globals::isPaused = true;
-			while (getch() != ' ') {
-				render();
-			};
-			Globals::isPaused = false;
+			Globals::isPaused = !Globals::isPaused;
 		break;
 		}
 
 		//Do processing
-		foodMgr->generate(ekans);
-		ekans.progress();
-		if (foodMgr->checkIfEaten(ekans.getHead().y, ekans.getHead().x)) {
-			ekans.lengthen(1);
-		}
-		if (stdconf::checkForSnakeSelfCollision && ekans.checkSelfCollision()) {
-			//Collision happened, GAME OVER
-			return 1;
-		}
-		if (stdconf::checkForSnakeWallCollision && collMgr->checkForCollision(ekans.getHead().y, ekans.getHead().x)) {
-			//Collision happened, GAME OVER
-			return 1;
+		if (!Globals::isPaused) {
+			foodMgr->generate(ekans);
+			ekans.progress();
+			if (foodMgr->checkIfEaten(ekans.getHead().y, ekans.getHead().x))
+				//Snake ate food, make it longer
+				ekans.lengthen(1);
+			if (stdconf::checkForSnakeSelfCollision && ekans.checkSelfCollision())
+				//Wall collision happened, GAME OVER
+				return 1;
+			if (stdconf::checkForSnakeWallCollision && collMgr->checkForCollision(ekans.getHead().y, ekans.getHead().x))
+				//Self collision happened, GAME OVER
+				return 1;
 		}
 
 		//Render output
+		if (hasDimensionsChanged())
+			clear();
 		render();
+
+		//Save window dimensions for this frame
+		winHeightLastFrame = Globals::winHeight;
+		winWidthLastFrame = Globals::winWidth;
 		
 		//Wait for <delay> amount of seconds
 		usleep(stdconf::delay);
@@ -105,14 +108,14 @@ void SnakeGame::deinitWindow() {
 	endwin();
 }
 
-void SnakeGame::drawStatusbar(const Snake& snake) {
+void SnakeGame::drawStatusbar() {
 	std::string lStr;
 	if (Globals::isPaused)
 		lStr += "Paused ";
 
 	std::string rStr;
 	rStr += "Snake length: ";
-	rStr += std::to_string(snake.body.size());
+	rStr += std::to_string(ekans.body.size());
 
 	std::string filloutStr(Globals::winWidth - lStr.size() - rStr.size(), ' ');
 	SAFE_ATTRON(COLOR_PAIR(STATUSBAR_PAIR));
@@ -120,17 +123,15 @@ void SnakeGame::drawStatusbar(const Snake& snake) {
 	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
 }
 
-void SnakeGame::redrawWindowIfDimsChanged() {
-	const int winHeightTmp = Globals::winHeight;
-	const int winWidthTmp = Globals::winWidth;
-	getmaxyx(stdscr, Globals::winHeight, Globals::winWidth);		//Fetch new terminal dimensions
-	if (winHeightTmp != Globals::winHeight || winWidthTmp != Globals::winWidth)
-		clear();
+bool SnakeGame::hasDimensionsChanged() {
+	if (winHeightLastFrame != Globals::winHeight || winWidthLastFrame != Globals::winWidth)
+		return true;
+	else
+		return false;
 }
 
 void SnakeGame::render() {
-	redrawWindowIfDimsChanged();
-	drawStatusbar(ekans);
+	drawStatusbar();
 	ekans.draw();
 	foodMgr->draw();
 }
