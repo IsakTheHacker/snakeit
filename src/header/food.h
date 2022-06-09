@@ -19,9 +19,9 @@ public:
 class FoodMgr {
 public:
 	int amount;
-	int minheight, minwidth, maxheight, maxwidth;
+	int paddingTop, paddingLeft, paddingBottom, paddingRight;
 	std::vector<Food> foodVec;
-	FoodMgr(int amountFoodAtSameTime, int minheight, int minwidth, int maxheight, int maxwidth);
+	FoodMgr(int amountFoodAtSameTime, int paddingTop, int paddingLeft, int paddingBottom, int paddingRight);
 	void generate(const Snake& snake);
 	bool checkIfEaten(int y, int x);
 	void draw();

@@ -3,6 +3,9 @@
 namespace Globals {
 	extern bool supportsColor;
 	extern bool isPaused;
+
+	extern int winHeight;
+	extern int winWidth;
 }
 
 #define HEAD_PAIR		1

@@ -8,9 +8,9 @@ SnakeGame::SnakeGame() {
 		stdconf::amountFoodAtSameTime,
 		stdconf::foodSpawnframePaddingTop,
 		stdconf::foodSpawnframePaddingLeft,
-		maxheight - stdconf::foodSpawnframePaddingBottom - 1,
-		maxwidth - stdconf::foodSpawnframePaddingRight);
-	collMgr = new CollMgr(0, 0, maxheight - 1, maxwidth);
+		stdconf::foodSpawnframePaddingBottom + 1,
+		stdconf::foodSpawnframePaddingRight);
+	collMgr = new CollMgr(0, 0, 1, 0);
 }
 SnakeGame::~SnakeGame() {
 	deinitWindow();
@@ -46,8 +46,9 @@ int SnakeGame::play() {
 		case ' ':
 			//Pause
 			Globals::isPaused = true;
-			drawStatusbar(ekans);
-			while (getch() != ' ');
+			while (getch() != ' ') {
+				render();
+			};
 			Globals::isPaused = false;
 		break;
 		}
@@ -68,9 +69,9 @@ int SnakeGame::play() {
 		}
 
 		//Render output
-		drawStatusbar(ekans);
-		ekans.draw();
+		render();
 		
+		//Wait for <delay> amount of seconds
 		usleep(stdconf::delay);
 	}
 	return 0;
@@ -84,7 +85,7 @@ void SnakeGame::initWindow() {
 	keypad(stdscr, true); // initialise the keyboard: we can use arrows for directions
 	noecho(); // user input is not displayed on the screen
 	curs_set(0); // cursor symbol is not not displayed on the screen (Linux)
-	getmaxyx(stdscr, maxheight, maxwidth); // define dimensions of game window
+	getmaxyx(stdscr, Globals::winHeight, Globals::winWidth); // define dimensions of game window
 
 	if (has_colors()) {
 		start_color();
@@ -113,8 +114,23 @@ void SnakeGame::drawStatusbar(const Snake& snake) {
 	rStr += "Snake length: ";
 	rStr += std::to_string(snake.body.size());
 
-	std::string filloutStr(maxwidth - lStr.size() - rStr.size(), ' ');
+	std::string filloutStr(Globals::winWidth - lStr.size() - rStr.size(), ' ');
 	SAFE_ATTRON(COLOR_PAIR(STATUSBAR_PAIR));
-	mvprintw(maxheight-1, 0, (lStr + filloutStr + rStr).c_str());
+	mvprintw(Globals::winHeight-1, 0, (lStr + filloutStr + rStr).c_str());
 	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
+}
+
+void SnakeGame::redrawWindowIfDimsChanged() {
+	const int winHeightTmp = Globals::winHeight;
+	const int winWidthTmp = Globals::winWidth;
+	getmaxyx(stdscr, Globals::winHeight, Globals::winWidth);		//Fetch new terminal dimensions
+	if (winHeightTmp != Globals::winHeight || winWidthTmp != Globals::winWidth)
+		clear();
+}
+
+void SnakeGame::render() {
+	redrawWindowIfDimsChanged();
+	drawStatusbar(ekans);
+	ekans.draw();
+	foodMgr->draw();
 }

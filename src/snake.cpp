@@ -98,31 +98,29 @@ void Snake::progress() {
 
 void Snake::createNewHead() {
 	int newX, newY;
-	int maxheight, maxwidth;
-	getmaxyx(stdscr, maxheight, maxwidth);	// define dimensions of game window
 	switch (direction) {
 	case Direction::RIGHT:
 		newX = body[body.size()-1].x + stdconf::xOffset;
-		if (newX > maxwidth - 1)
+		if (newX > Globals::winWidth - 1)
 			newX = 0;
 		body.push_back(Bodypart(body[body.size()-1].y, newX, stdconf::snakeHeadRight));
 	break;
 	case Direction::LEFT:
 		newX = body[body.size()-1].x - stdconf::xOffset;
 		if (newX < 0)
-			newX = maxwidth - 2;
+			newX = Globals::winWidth - 2;
 		body.push_back(Bodypart(body[body.size()-1].y, newX, stdconf::snakeHeadLeft));
 	break;
 	case Direction::DOWN:
 		newY = body[body.size()-1].y + stdconf::yOffset;
-		if (newY > maxheight - 2)
+		if (newY > Globals::winHeight - 2)
 			newY = 0;
 		body.push_back(Bodypart(newY, body[body.size()-1].x, stdconf::snakeHeadDown));
 	break;
 	case Direction::UP:
 		newY = body[body.size()-1].y - stdconf::yOffset;
 		if (newY < 0)
-			newY = maxheight - 2;
+			newY = Globals::winHeight - 2;
 		body.push_back(Bodypart(newY, body[body.size()-1].x, stdconf::snakeHeadUp));
 	break;
 	}

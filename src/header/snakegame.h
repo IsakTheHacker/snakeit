@@ -14,7 +14,6 @@
 
 class SnakeGame {
 private:
-	int maxheight, maxwidth;
 	Snake ekans;
 	FoodMgr* foodMgr;
 	CollMgr* collMgr;
@@ -22,6 +21,8 @@ private:
 	void initWindow();
 	void deinitWindow();
 	void drawStatusbar(const Snake& snake);
+	void redrawWindowIfDimsChanged();
+	void render();
 
 public:
 	SnakeGame();

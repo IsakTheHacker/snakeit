@@ -6,20 +6,18 @@ Food::Food(const int& row, const int& col, const wchar_t& character) {
 	c = character;
 }
 
-FoodMgr::FoodMgr(int amountFoodAtSameTime, int minheight, int minwidth, int maxheight, int maxwidth)
-	: amount{amountFoodAtSameTime}, minheight{minheight}, minwidth{minwidth}, maxheight{maxheight}, maxwidth{maxwidth} {
-	
-}
+FoodMgr::FoodMgr(int amountFoodAtSameTime, int paddingTop, int paddingLeft, int paddingBottom, int paddingRight)
+	: amount{amountFoodAtSameTime}, paddingTop{paddingTop}, paddingLeft{paddingLeft}, paddingBottom{paddingBottom}, paddingRight{paddingRight} {}
 
 void FoodMgr::generate(const Snake& snake) {
 	while ((int)foodVec.size() < amount) {
 		//Create array with favorable coordinates
 		std::vector<int> favorableYPositions;
 		std::vector<int> favorableXPositions;
-		for (int i = minheight; i < maxheight; i++) {
+		for (int i = paddingTop; i < Globals::winHeight - paddingBottom; i++) {
 			favorableYPositions.push_back(i);
 		}
-		for (int i = minwidth; i < maxwidth; i += 2) {
+		for (int i = paddingLeft; i < Globals::winWidth - paddingRight; i += 2) {
 			favorableXPositions.push_back(i);
 		}
 
@@ -33,7 +31,6 @@ void FoodMgr::generate(const Snake& snake) {
 		int randx = randIntRange(0, favorableXPositions.size() - 1);
 		foodVec.push_back(Food(favorableYPositions[randy], favorableXPositions[randx], stdconf::food));
 	}
-	draw();
 }
 
 void FoodMgr::draw() {

@@ -1,11 +1,11 @@
 #pragma once
 #include "stdconfig.h"
+#include "globals.h"
 
 class CollMgr {
 public:
-	CollMgr(int yMin, int xMin, int yMax, int xMax);
-	void changeBorderDim(int yMin, int xMin, int yMax, int xMax);
+	CollMgr(int paddingTop, int paddingLeft, int paddingBottom, int paddingRight);
 	bool checkForCollision(int y, int x);
 private:
-	int yMin, xMin, yMax, xMax;
+	int paddingTop, paddingLeft, paddingBottom, paddingRight;
 };
