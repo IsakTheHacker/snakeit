@@ -46,20 +46,7 @@ void Snake::lengthen(int bodypartAmount) {
 	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
 	body[body.size()-1] = Bodypart(body[body.size()-1].y, body[body.size()-1].x, stdconf::snakeBodyPart);
 	
-	switch(direction) {
-	case Direction::RIGHT:
-		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x + stdconf::xOffset, stdconf::snakeHeadRight));
-	break;
-	case Direction::LEFT:
-		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x - stdconf::xOffset, stdconf::snakeHeadLeft));
-	break;
-	case Direction::DOWN :
-		body.push_back(Bodypart(body[body.size()-1].y + stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHeadDown));
-	break;
-	case Direction::UP:
-		body.push_back(Bodypart(body[body.size()-1].y - stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHeadUp));
-	break;
-	}
+	createNewHead();
 
 	//Draw new head
 	move(body[body.size()-1].y, body[body.size()-1].x); 		//Move to new head
@@ -96,7 +83,21 @@ void Snake::progress() {
 	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
 	body[body.size()-1] = Bodypart(body[body.size()-1].y, body[body.size()-1].x, stdconf::snakeBodyPart);
 	
-	switch(direction) {
+	createNewHead();
+
+	//Draw new head
+	move(body[body.size()-1].y, body[body.size()-1].x); 		//Move to new head
+	cchar = wchar2cchar(body[body.size()-1].c);
+	SAFE_ATTRON(COLOR_PAIR(HEAD_PAIR));
+	add_wch(&cchar);
+	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
+
+	move(cy, cx);
+	refresh();
+}
+
+void Snake::createNewHead() {
+	switch (direction) {
 	case Direction::RIGHT:
 		body.push_back(Bodypart(body[body.size()-1].y, body[body.size()-1].x + stdconf::xOffset, stdconf::snakeHeadRight));
 	break;
@@ -110,14 +111,4 @@ void Snake::progress() {
 		body.push_back(Bodypart(body[body.size()-1].y - stdconf::yOffset, body[body.size()-1].x, stdconf::snakeHeadUp));
 	break;
 	}
-
-	//Draw new head
-	move(body[body.size()-1].y, body[body.size()-1].x); 		//Move to new head
-	cchar = wchar2cchar(body[body.size()-1].c);
-	SAFE_ATTRON(COLOR_PAIR(HEAD_PAIR));
-	add_wch(&cchar);
-	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
-
-	move(cy, cx);
-	refresh();
 }

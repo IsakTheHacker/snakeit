@@ -31,4 +31,6 @@ public:
 	Bodypart getHead();
 	void lengthen(int bodypartAmount);
 	bool checkSelfCollision();
+private:
+	void createNewHead();
 };
