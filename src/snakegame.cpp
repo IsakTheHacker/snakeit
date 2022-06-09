@@ -22,32 +22,18 @@ int SnakeGame::play() {
 
 		//Recieve input
 		getmaxyx(stdscr, Globals::winHeight, Globals::winWidth);		//Update dimensions of game window
-		c = getch();
+		c = getch();													//Fetch currently pressed key
+		if (!Globals::isPaused)
+			receiveDirections(c);
 		switch (c) {
-		case KEY_LEFT:
-			if (ekans.direction != Direction::RIGHT && !Globals::isPaused)
-				ekans.direction = Direction::LEFT;
-		break;
-		case KEY_RIGHT:
-			if (ekans.direction != Direction::LEFT && !Globals::isPaused)
-				ekans.direction = Direction::RIGHT;
-		break;
-		case KEY_UP:
-			if (ekans.direction != Direction::DOWN && !Globals::isPaused)
-				ekans.direction = Direction::UP;
-		break;
-		case KEY_DOWN:
-			if (ekans.direction != Direction::UP && !Globals::isPaused)
-				ekans.direction = Direction::DOWN;
-		break;
-		case KEY_BACKSPACE:
-			//Quit
-			return 2;
-		break;
-		case ' ':
-			//Pause
-			Globals::isPaused = !Globals::isPaused;
-		break;
+			case KEY_BACKSPACE:
+				//Quit game
+				return 2;
+			break;
+			case ' ':
+				//Pause game
+				Globals::isPaused = !Globals::isPaused;
+			break;
 		}
 
 		//Do processing
@@ -73,9 +59,9 @@ int SnakeGame::play() {
 		//Save window dimensions for this frame
 		winHeightLastFrame = Globals::winHeight;
 		winWidthLastFrame = Globals::winWidth;
-		flushinp();
 		
-		//Wait for <delay> amount of seconds
+		//Clear input queue and wait for <delay> amount of seconds
+		flushinp();
 		usleep(stdconf::delay);
 	}
 	return 0;
@@ -122,6 +108,27 @@ void SnakeGame::drawStatusbar() {
 	SAFE_ATTRON(COLOR_PAIR(STATUSBAR_PAIR));
 	mvprintw(Globals::winHeight-1, 0, (lStr + filloutStr + rStr).c_str());
 	SAFE_ATTROFF(COLOR_PAIR(COFF_PAIR));
+}
+
+void SnakeGame::receiveDirections(const int& c) {
+	switch (c) {
+		case KEY_LEFT:
+			if (ekans.direction != Direction::RIGHT)
+				ekans.direction = Direction::LEFT;
+		break;
+		case KEY_RIGHT:
+			if (ekans.direction != Direction::LEFT)
+				ekans.direction = Direction::RIGHT;
+		break;
+		case KEY_UP:
+			if (ekans.direction != Direction::DOWN)
+				ekans.direction = Direction::UP;
+		break;
+		case KEY_DOWN:
+			if (ekans.direction != Direction::UP)
+				ekans.direction = Direction::DOWN;
+		break;
+	}
 }
 
 bool SnakeGame::hasDimensionsChanged() {

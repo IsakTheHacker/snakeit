@@ -25,6 +25,7 @@ private:
 	void deinitWindow();
 	void drawStatusbar();
 	bool hasDimensionsChanged();
+	void receiveDirections(const int& c);
 	void render();
 
 public:
