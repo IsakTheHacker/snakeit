@@ -73,6 +73,7 @@ int SnakeGame::play() {
 		//Save window dimensions for this frame
 		winHeightLastFrame = Globals::winHeight;
 		winWidthLastFrame = Globals::winWidth;
+		flushinp();
 		
 		//Wait for <delay> amount of seconds
 		usleep(stdconf::delay);
