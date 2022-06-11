@@ -27,3 +27,4 @@ parts:
       mkdir -p bin
     plugin: make
     build-packages: [libncursesw5-dev]
+    stage-packages: [libncursesw5]
