@@ -5,3 +5,6 @@ bin/
 
 #Ignore log files
 *.log
+
+#Ignore snap packages
+*.snap
