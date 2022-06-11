@@ -2,7 +2,7 @@
 
 #include <deque>
 
-#include <ncurses.h>
+#include "deps.h"
 
 #include "stdconfig.h"
 #include "handyFunctions.h"

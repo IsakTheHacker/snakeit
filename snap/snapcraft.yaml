@@ -26,4 +26,4 @@ parts:
       snapcraftctl pull
       mkdir -p bin
     plugin: make
-    build-packages: [libncurses-dev]
+    build-packages: [libncursesw5-dev]

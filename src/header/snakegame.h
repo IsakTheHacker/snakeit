@@ -3,7 +3,7 @@
 #include <deque>
 #include <string>
 
-#include <ncurses.h>
+#include "deps.h"
 #include <unistd.h>
 
 #include "stdconfig.h"

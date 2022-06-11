@@ -2,7 +2,7 @@
 
 #include <string>
 #include <random>
-#include <ncurses.h>
+#include "deps.h"
 
 #include "globals.h"
 
