@@ -10,7 +10,7 @@ bindir := .\/bin\/
 
 APPNAME := snakeit
 INCLUDES := -I./src/header/
-LDLIBS := -lncursesw
+LDLIBS := -lncursesw -ltinfo
 
 srcfiles := $(srcdir)main.cpp $(srcdir)snakegame.cpp $(srcdir)food.cpp $(srcdir)snake.cpp $(srcdir)handyFunctions.cpp $(srcdir)collMgr.cpp $(srcdir)globals.cpp
 

@@ -23,5 +23,9 @@ parts:
     source: https://github.com/IsakTheHacker/snakeit.git
     source-type: git
     plugin: make
-    build-packages: [libncursesw5-dev]
-    stage-packages: [libncursesw5]
+    build-packages:
+      - libncursesw5-dev
+      - libtinfo-dev
+    stage-packages:
+      - libncursesw5
+      - libtinfo5
