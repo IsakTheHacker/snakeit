@@ -37,4 +37,5 @@ clean:
 	rm -f $(bindir)$(APPNAME)
 
 $(APPNAME):
+	mkdir -p $(bindir)
 	$(CXX) $(INCLUDES) $(DEFINE) $(CXXFLAGS) $(LDFLAGS) -o $(bindir)$(APPNAME) $(srcfiles) $(LDLIBS)
