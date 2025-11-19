@@ -14,6 +14,6 @@ updates:
       - "dependencies/github-actions"
     schedule:
       interval: "weekly"
-      day: "saturday"            #Check for updates on saturdays
+      day: "saturday"            #Check for updates on Saturdays
       time: "09:00"
       timezone: "Europe/Stockholm"
